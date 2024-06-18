@@ -3,76 +3,53 @@ import time
 import random
 import math
 import Physics
+import Physics.ship
 
 WIDTH,HIGHT=1000,700
 WIN=pygame.display.set_mode((WIDTH,HIGHT))
 pygame.display.set_caption("Asteroids")
-#BG=pygame.image.load("AsteroidsBackground.jpg")
+BG=(pygame.image.load("BG.jpg"))
+BG2=pygame.transform.scale(BG,(WIDTH,HIGHT))
+asteroid=pygame.image.load("Asteroid.jpg")
+spaceship=pygame.image.load("Spaceship.jpg")
+Orcha=pygame.image.load("Orcha.jpg")
+Whale=pygame.image.load("Whale.jpg")
 
 #Ship's properties
 SHIP_X,SHIP_Y=WIDTH // 2,HIGHT // 2
 SPEED_X,SPEED_Y=50,50
 SHIP_ANGLE=0
 
-ship_circle_center = (SHIP_X,SHIP_Y)
 radius = 30
-def draw():
-    #WIN.blit(BG,(0,0))
-    WIN.fill(0,0,0)
-    pygame.draw.circle(WIN,"blue",ship_circle_center,radius)
-    
-    
+def draw(ship):
+    WIN.blit(BG2,(0,0))
+    #WIN.fill(0,0,0)
+
+    ship.draw(WIN,"blue",radius)
     
     ship_circle_distance = 20
 
-    POINTER_X=SHIP_X + math.cos(SHIP_ANGLE) * ship_circle_distance
-    POINTER_Y= SHIP_Y + math.sin(SHIP_ANGLE) * ship_circle_distance
+    POINTER_X=ship.x + math.cos(math.radians(ship.angle)) * ship_circle_distance
+    POINTER_Y= ship.y + math.sin(math.radians(ship.angle)) * ship_circle_distance
     pointer_circle_center=(POINTER_X,POINTER_Y)
     pygame.draw.circle(WIN,"yellow",pointer_circle_center,5)
-    
+    ship.update(1,HIGHT,WIDTH)
     pygame.display.update()
 
-def update(dt):
-    global SHIP_ANGLE
-    global SHIP_X
-    global SHIP_Y
-    global SPEED_X
-    global SPEED_Y
-    
-    TURNING_VEL = 10
-    keys = pygame.key.get_pressed()
-    
-    if keys[pygame.K_RIGHT]:
-        SHIP_ANGLE += TURNING_VEL * dt
-    
-    if keys[pygame.K_LEFT]:
-        SHIP_ANGLE -= TURNING_VEL * dt
-        
-    SHIP_ANGLE %= 2 * math.pi
-    
-    if keys[pygame.K_UP]:
-        ship_speed = 100
-        SPEED_X += math.cos(SHIP_ANGLE) * ship_speed * dt
-        SPEED_Y += math.sin(SHIP_ANGLE) * ship_speed * dt
-
-    SHIP_X += SPEED_X * dt
-    SHIP_Y += SPEED_Y * dt
-    SHIP_X%=WIDTH
-    SHIP_Y%=HIGHT
-    
 def main():
     run=True
     
     #to manage the speed of objects in the game
     clock=pygame.time.Clock()
-    
+    ship=Physics.ship.Ship(SHIP_X,SHIP_Y,SHIP_ANGLE,SPEED_X,SPEED_Y)
     while run:
         clock.tick(60)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 run=False
                 break
-        draw()
+        
+        draw(ship)
             
     pygame.quit()
 

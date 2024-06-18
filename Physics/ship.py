@@ -26,10 +26,10 @@ class Ship:
     
         if keys[pygame.K_UP]:
             ship_speed = 100
-            self.vel_x += math.cos(self.angle) * ship_speed * dt
-            self.vel_y += math.sin(self.angle) * ship_speed * dt
+            self.vel_x += math.cos(math.radians(self.angle)) * ship_speed * dt
+            self.vel_y += math.sin(math.radians(self.angle)) * ship_speed * dt
 
-        self.x += self.vel_x* dt
-        self.y += self.vel_y * dt
-        self.x%=WIDTH
-        self.y%=HIGHT
+        #self.x += self.vel_x* dt
+        #self.y += self.vel_y * dt
+        #self.x%=WIDTH
+        #self.y%=HIGHT
