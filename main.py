@@ -39,7 +39,7 @@ def draw(ship):
     pygame.draw.circle(WIN,"yellow",pointer_circle_center,5)
     
     for bullet in ship.bullets:
-               pygame.draw.circle(WIN,"green",(bullet['x'], bullet['y']),5)
+               pygame.draw.circle(WIN,"green",(bullet['x']-(radius/2), bullet['y']-(radius/2)),5)
     
     ship.update(1,HIGHT,WIDTH)
     pygame.display.update()
