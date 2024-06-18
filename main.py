@@ -10,10 +10,11 @@ WIN=pygame.display.set_mode((WIDTH,HIGHT))
 pygame.display.set_caption("Asteroids")
 BG=(pygame.image.load("BG.jpg"))
 BG2=pygame.transform.scale(BG,(WIDTH,HIGHT))
-asteroid=pygame.image.load("Asteroid.jpg")
-spaceship=pygame.image.load("Spaceship.jpg")
-Orcha=pygame.image.load("Orcha.jpg")
-Whale=pygame.image.load("Whale.jpg")
+asteroid=pygame.image.load("Asteroid.png")
+spaceship=pygame.image.load("Spaceship.png")
+scaledship=pygame.transform.scale(spaceship,(70,70))
+Orcha=pygame.image.load("Orcha.png")
+Whale=pygame.image.load("Whale.png")
 
 #Ship's properties
 SHIP_X,SHIP_Y=WIDTH // 2,HIGHT // 2
@@ -25,7 +26,7 @@ def draw(ship):
     WIN.blit(BG2,(0,0))
     #WIN.fill(0,0,0)
 
-    ship.draw(WIN,"blue",radius)
+    ship.draw(WIN,"red",radius)
     
     ship_circle_distance = 20
 
