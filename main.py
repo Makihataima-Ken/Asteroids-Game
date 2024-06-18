@@ -5,6 +5,8 @@ import math
 import Physics
 import Physics.ship
 
+pygame.init()
+
 WIDTH,HIGHT=1000,700
 WIN=pygame.display.set_mode((WIDTH,HIGHT))
 pygame.display.set_caption("Asteroids")
@@ -18,13 +20,14 @@ Whale=pygame.image.load("Whale.png")
 
 #Ship's properties
 SHIP_X,SHIP_Y=WIDTH // 2,HIGHT // 2
-SPEED_X,SPEED_Y=50,50
+SPEED_X,SPEED_Y=0,0
 SHIP_ANGLE=0
 
 radius = 30
 def draw(ship):
     WIN.blit(BG2,(0,0))
     #WIN.fill(0,0,0)
+    
 
     ship.draw(WIN,"red",radius)
     
@@ -34,6 +37,10 @@ def draw(ship):
     POINTER_Y= ship.y + math.sin(math.radians(ship.angle)) * ship_circle_distance
     pointer_circle_center=(POINTER_X,POINTER_Y)
     pygame.draw.circle(WIN,"yellow",pointer_circle_center,5)
+    
+    for bullet in ship.bullets:
+               pygame.draw.circle(WIN,"green",(bullet['x'], bullet['y']),5)
+    
     ship.update(1,HIGHT,WIDTH)
     pygame.display.update()
 

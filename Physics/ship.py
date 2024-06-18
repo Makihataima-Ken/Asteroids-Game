@@ -8,6 +8,7 @@ class Ship:
         self.angle = angle
         self.vel_x=vel_x
         self.vel_y=vel_y
+        self.bullets=[]
 
     def draw(self, win, colour, radius):
         pygame.draw.circle(win, colour, (self.x, self.y), radius)
@@ -16,20 +17,26 @@ class Ship:
         TURNING_VEL = 10
         keys = pygame.key.get_pressed()
     
+        #Diractions
         if keys[pygame.K_RIGHT]:
             self.angle += TURNING_VEL * dt
     
         if keys[pygame.K_LEFT]:
             self.angle-= TURNING_VEL * dt
          
-        self.angle %= 2 * math.pi
-    
+        #self.angle %= 2 * math.pi
+        
+        #Movment
         if keys[pygame.K_UP]:
-            ship_speed = 100
-            self.vel_x += math.cos(math.radians(self.angle)) * ship_speed * dt
-            self.vel_y += math.sin(math.radians(self.angle)) * ship_speed * dt
-
-        #self.x += self.vel_x* dt
-        #self.y += self.vel_y * dt
-        #self.x%=WIDTH
-        #self.y%=HIGHT
+            ship_speed = 2
+            self.vel_x = math.cos(math.radians(self.angle)) * ship_speed * dt
+            self.vel_y = math.sin(math.radians(self.angle)) * ship_speed * dt
+        #update position
+        self.x += self.vel_x* dt
+        self.y += self.vel_y * dt
+        self.x%=WIDTH
+        self.y%=HIGHT
+        
+        if keys[pygame.K_s]:
+            self.bullets.append({'x': self.x+math.cos(math.radians(self.angle)),
+                                 'y': self.y+math.sin(math.radians(self.angle)),})
