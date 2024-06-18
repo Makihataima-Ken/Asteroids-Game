@@ -18,3 +18,5 @@ class Asteroids:
             win.blit(rock,(self.x,self.y))
         elif(type==2):
              win.blit(Whale,(self.x,self.y))
+        elif(type==3):
+             win.blit(Orcha,(self.x,self.y))
