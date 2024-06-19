@@ -29,7 +29,7 @@ def draw(ship,asteroids):
     WIN.blit(BG2,(0,0))
     global score
     #draw the ship on the screen
-    ship.draw(WIN,"red")
+    ship.draw(WIN,colour=(33,45,87))
     #draw an inner circle to function as a pointer for diractions
     diraction=Physics.diraction.Diraction(ship.x,ship.y,ship.angle)
     diraction.draw(WIN,"yellow")
@@ -61,10 +61,11 @@ def draw(ship,asteroids):
         if(intersection(ship,asteroid)):
             FONT =pygame.font.SysFont("comicsans", 50)
             text = FONT.render("Game Over :(", True,"red")
-            WIN.blit(text,(WIDTH/2,HIGHT/2))
+            text_rect = text.get_rect(center=(WIDTH/2, HIGHT/2))
+            WIN.blit(text,text_rect)
             pygame.display.update()
-            #pygame.time.delay(4000)
-            #return 1
+            pygame.time.delay(3000)
+            return 1
             
         if(asteroid.x> WIDTH or asteroid.y<0 ):
                 asteroids.remove(asteroid)

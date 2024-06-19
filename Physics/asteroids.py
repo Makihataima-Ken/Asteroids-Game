@@ -18,18 +18,19 @@ class Asteroids:
         self.angle=random.randint(0,360)
         self.vel=2
         self.type=random.randint(1,3)
-        self.radius=70*self.type
-        self.stage=self.type
+        self.radius=35*self.type
+        
+        
     
     def draw(self,win):
         if(self.type==1):
-            scaledrock=pygame.transform.scale(rock,(self.radius,self.radius))
+            scaledrock=pygame.transform.scale(rock,(self.radius*2,self.radius*2))
             win.blit(scaledrock,(self.x,self.y))
         elif(self.type==2):
-            scaledwhale=pygame.transform.scale(Whale,(self.radius,self.radius))
+            scaledwhale=pygame.transform.scale(Whale,(self.radius*2,self.radius*2))
             win.blit(scaledwhale,(self.x,self.y))
         elif(self.type==3):
-            scaledorcha=pygame.transform.scale(Orcha,(self.radius,self.radius))
+            scaledorcha=pygame.transform.scale(Orcha,(self.radius*2,self.radius*2))
             win.blit(scaledorcha,(self.x,self.y))
              
     def split(self):
@@ -38,13 +39,13 @@ class Asteroids:
         n1.x=self.x
         n1.y=self.y
         n1.type=self.type
-        n1.radius=self.radius-70
+        n1.radius=self.radius-35
         n2=Asteroids(None,None)
         n2.x=self.x
         n2.y=self.y
         n2.angle=(180-n1.angle)
         n2.type=self.type
-        n2.radius=self.radius-70
+        n2.radius=self.radius-35
         neostroids.append(n1)
         neostroids.append(n2)
         return neostroids
