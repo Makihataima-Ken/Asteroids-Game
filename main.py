@@ -41,6 +41,10 @@ def draw(ship,asteroids):
             for asteroid in asteroids.copy():
                 if (intersection(bullet,asteroid)):
                     ship.bullets.remove(bullet)
+                    if (asteroid.radius>70):
+                        splitstroids=asteroid.split()
+                        asteroids.append(splitstroids[0])
+                        asteroids.append(splitstroids[1])
                     asteroids.remove(asteroid)
                     break
     
