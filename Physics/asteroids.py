@@ -5,18 +5,30 @@ import random
 rock=pygame.image.load("Asteroid.png")
 Orcha=pygame.image.load("Orcha.png")
 Whale=pygame.image.load("Whale.png")
+scaledrock=pygame.transform.scale(rock,(70,70))
+scaledorcha=pygame.transform.scale(Orcha,(140,140))
+scaledwhale=pygame.transform.scale(Whale,(210,210))
 
 class Asteroids:
     def __init__(self,width,height):
-        self.x=random.random(0,width)
-        self.y=random.random(0,height)
-        self.angle= random.random() * (2 * math.pi)
+        self.rand=random.choice([[random.choice([0,width-1]),random.randint(0,height-1)],[random.randint(0,width-1),random.choice([0,height-1])]])
+        self.x,self.y=self.rand
+        self.angle=random.randint(0,360)
         self.vel=2
+        self.type=random.randint(1,3)
+        self.radius=0
     
-    def draw(self,type,win):
-        if(type==1):
-            win.blit(rock,(self.x,self.y))
-        elif(type==2):
-             win.blit(Whale,(self.x,self.y))
-        elif(type==3):
-             win.blit(Orcha,(self.x,self.y))
+    def draw(self,win):
+        if(self.type==1):
+            self.radius=70
+            win.blit(scaledrock,(self.x,self.y))
+        elif(self.type==2):
+             self.radius=140
+             win.blit(scaledwhale,(self.x,self.y))
+        elif(self.type==3):
+             self.radius=210
+             win.blit(scaledorcha,(self.x,self.y))
+             
+    def update(self):
+        self.x+=math.cos(math.radians(self.angle))*self.vel
+        self.y+=math.sin(math.radians(self.angle))*self.vel

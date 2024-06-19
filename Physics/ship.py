@@ -9,9 +9,10 @@ class Ship:
         self.vel_x=vel_x
         self.vel_y=vel_y
         self.bullets=[]
+        self.radius=30
 
-    def draw(self, win, colour, radius):
-        pygame.draw.circle(win, colour, (self.x, self.y), radius)
+    def draw(self, win, colour):
+        pygame.draw.circle(win, colour, (self.x, self.y), self.radius)
 
     def update(self,dt,HIGHT,WIDTH):
         TURNING_VEL = 10
