@@ -1,5 +1,6 @@
 import pygame
 import math
+from .bullet import Bullet
 
 class Ship:
     def __init__(self, x, y, angle,vel_x,vel_y):
@@ -40,17 +41,12 @@ class Ship:
         
         #bullets control
         for bullet in self.bullets:
-            bullet_speed = 5
-            bullet['x'] += math.cos(bullet['angle']) * bullet_speed * dt
-            bullet['y'] += math.sin(bullet['angle']) * bullet_speed * dt
-            if(bullet['x']> WIDTH or bullet['x']<0 ):
+            bullet.update(dt)
+            if(bullet.x> WIDTH or bullet.x<0 ):
                 self.bullets.remove(bullet)
-            elif(bullet['y']> HIGHT or bullet['y']<0):
+            elif(bullet.y> HIGHT or bullet.y<0):
                 self.bullets.remove(bullet)
             
         
         if keys[pygame.K_s]:
-            self.bullets.append({'x': self.x+math.cos(math.radians(self.angle)),
-                                 'y': self.y+math.sin(math.radians(self.angle)),
-                                 'angle': self.angle,
-                                 })
+            self.bullets.append(Bullet(self.x+math.cos(math.radians(self.angle)),self.y+math.sin(math.radians(self.angle)),self.angle))

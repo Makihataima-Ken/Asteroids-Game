@@ -11,10 +11,10 @@ pygame.init()
 WIDTH,HIGHT=1000,700
 WIN=pygame.display.set_mode((WIDTH,HIGHT))
 pygame.display.set_caption("Asteroids")
-BG=(pygame.image.load("BG.jpg"))
+BG=(pygame.image.load("pics\BG.jpg"))
 BG2=pygame.transform.scale(BG,(WIDTH,HIGHT))
 
-spaceship=pygame.image.load("Spaceship.png")
+spaceship=pygame.image.load("pics\Spaceship.png")
 scaledship=pygame.transform.scale(spaceship,(70,70))
 
 
@@ -37,7 +37,12 @@ def draw(ship,asteroids):
     pygame.draw.circle(WIN,"yellow",pointer_circle_center,5)
     
     for bullet in ship.bullets:
-               pygame.draw.circle(WIN,"green",(bullet['x']-(ship.radius/2), bullet['y']-(ship.radius/2)),5)
+            bullet.draw(WIN,"green")
+            for asteroid in asteroids.copy():
+                if (intersection(bullet,asteroid)):
+                    ship.bullets.remove(bullet)
+                    asteroids.remove(asteroid)
+                    break
     
     for asteroid in asteroids:
         asteroid.draw(WIN)

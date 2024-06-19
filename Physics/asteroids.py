@@ -2,9 +2,9 @@ import pygame
 import math
 import random
 
-rock=pygame.image.load("Asteroid.png")
-Orcha=pygame.image.load("Orcha.png")
-Whale=pygame.image.load("Whale.png")
+rock=pygame.image.load("pics\Asteroid.png")
+Orcha=pygame.image.load("pics\Orcha.png")
+Whale=pygame.image.load("pics\Whale.png")
 scaledrock=pygame.transform.scale(rock,(70,70))
 scaledorcha=pygame.transform.scale(Orcha,(140,140))
 scaledwhale=pygame.transform.scale(Whale,(210,210))
