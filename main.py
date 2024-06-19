@@ -13,7 +13,7 @@ pygame.font.init()
 WIDTH,HIGHT=1000,700
 WIN=pygame.display.set_mode((WIDTH,HIGHT))
 pygame.display.set_caption("Asteroids")
-BG=(pygame.image.load("pics\BG.jpg"))
+BG=(pygame.image.load("pics\space2.jpg"))
 BG2=pygame.transform.scale(BG,(WIDTH,HIGHT))
 
 spaceship=pygame.image.load("pics\Spaceship.png")
