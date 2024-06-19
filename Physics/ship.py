@@ -3,12 +3,12 @@ import math
 from .bullet import Bullet
 
 class Ship:
-    def __init__(self, x, y, angle,vel_x,vel_y):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.angle = angle
-        self.vel_x=vel_x
-        self.vel_y=vel_y
+        self.angle = 0
+        self.vel_x=0
+        self.vel_y=0
         self.bullets=[]
         self.radius=30
 

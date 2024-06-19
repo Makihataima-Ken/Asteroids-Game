@@ -21,8 +21,7 @@ scaledship=pygame.transform.scale(spaceship,(70,70))
 
 #Ship's properties
 SHIP_X,SHIP_Y=WIDTH // 2,HIGHT // 2
-SPEED_X,SPEED_Y=0,0
-SHIP_ANGLE=0
+
 score =0
 def draw(ship,asteroids):
     WIN.blit(BG2,(0,0))
@@ -85,7 +84,7 @@ def main():
     
     #to manage the speed of objects in the game
     clock=pygame.time.Clock()
-    ship=Physics.ship.Ship(SHIP_X,SHIP_Y,SHIP_ANGLE,SPEED_X,SPEED_Y)
+    ship=Physics.ship.Ship(SHIP_X,SHIP_Y)
     asteroids=[]
     cnt=0
 
