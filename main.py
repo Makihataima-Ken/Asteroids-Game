@@ -23,10 +23,10 @@ scaledship=pygame.transform.scale(spaceship,(70,70))
 SHIP_X,SHIP_Y=WIDTH // 2,HIGHT // 2
 SPEED_X,SPEED_Y=0,0
 SHIP_ANGLE=0
-
-def draw(ship,asteroids,score):
+score =0
+def draw(ship,asteroids):
     WIN.blit(BG2,(0,0))
-    
+    global score
     ship.draw(WIN,"red")
     
     ship_circle_distance = 20
@@ -49,6 +49,11 @@ def draw(ship,asteroids,score):
                     asteroids.remove(asteroid)
                     break
     
+    FONT =pygame.font.SysFont("comicsans", 50)
+    text = FONT.render(str(score), True,"white")
+    WIN.blit(text,(0,0))
+    
+    
     for asteroid in asteroids:
         asteroid.draw(WIN)
     
@@ -58,8 +63,9 @@ def draw(ship,asteroids,score):
             FONT =pygame.font.SysFont("comicsans", 50)
             text = FONT.render("Game Over :(", True,"red")
             WIN.blit(text,(WIDTH/2,HIGHT/2))
-            pygame.time.delay(4000)
-            return 1
+            #pygame.time.delay(4000)
+            #return 1
+            
         if(asteroid.x> WIDTH or asteroid.y<0 ):
                 asteroids.remove(asteroid)
         elif(asteroid.y> HIGHT or asteroid.y<0):
@@ -83,7 +89,7 @@ def main():
     asteroids=[]
     cnt=0
 
-    score=0 
+    
     while run:
         clock.tick(60)
         cnt+=1
@@ -94,7 +100,7 @@ def main():
         if(cnt%40==0):
             asteroids.append(Physics.asteroids.Asteroids(WIDTH,HIGHT))
             
-        if(draw(ship,asteroids,score)):
+        if(draw(ship,asteroids)):
             run=False
         
             
