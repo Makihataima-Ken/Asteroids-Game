@@ -7,6 +7,7 @@ import Physics.asteroids
 import Physics.ship
 
 pygame.init()
+pygame.font.init()
 
 WIDTH,HIGHT=1000,700
 WIN=pygame.display.set_mode((WIDTH,HIGHT))
@@ -23,9 +24,8 @@ SHIP_X,SHIP_Y=WIDTH // 2,HIGHT // 2
 SPEED_X,SPEED_Y=0,0
 SHIP_ANGLE=0
 
-def draw(ship,asteroids):
+def draw(ship,asteroids,score):
     WIN.blit(BG2,(0,0))
-    #WIN.fill(0,0,0)
     
     ship.draw(WIN,"red")
     
@@ -40,6 +40,7 @@ def draw(ship,asteroids):
             bullet.draw(WIN,"green")
             for asteroid in asteroids.copy():
                 if (intersection(bullet,asteroid)):
+                    score+=1
                     ship.bullets.remove(bullet)
                     if (asteroid.radius>70):
                         splitstroids=asteroid.split()
@@ -54,7 +55,11 @@ def draw(ship,asteroids):
     for asteroid in asteroids:
         asteroid.update()
         if(intersection(ship,asteroid)):
-            print("collision")
+            FONT =pygame.font.SysFont("comicsans", 50)
+            text = FONT.render("Game Over :(", True,"red")
+            WIN.blit(text,(WIDTH/2,HIGHT/2))
+            pygame.time.delay(4000)
+            return 1
         if(asteroid.x> WIDTH or asteroid.y<0 ):
                 asteroids.remove(asteroid)
         elif(asteroid.y> HIGHT or asteroid.y<0):
@@ -64,6 +69,7 @@ def draw(ship,asteroids):
     
     ship.update(1,HIGHT,WIDTH)
     pygame.display.update()
+    return 0
 
 def intersection(a, b):
         return (a.x - b.x)**2 + (a.y - b.y)**2 <= (a.radius + b.radius)**2
@@ -76,6 +82,8 @@ def main():
     ship=Physics.ship.Ship(SHIP_X,SHIP_Y,SHIP_ANGLE,SPEED_X,SPEED_Y)
     asteroids=[]
     cnt=0
+
+    score=0 
     while run:
         clock.tick(60)
         cnt+=1
@@ -86,7 +94,9 @@ def main():
         if(cnt%40==0):
             asteroids.append(Physics.asteroids.Asteroids(WIDTH,HIGHT))
             
-        draw(ship,asteroids)
+        if(draw(ship,asteroids,score)):
+            run=False
+        
             
     pygame.quit()
 
