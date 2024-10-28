@@ -80,6 +80,7 @@ def draw(ship,asteroids):
     return 0
 #check the condition of intersection between objects
 def intersection(a, b):
+        print(str(a.x)+" "+str(b.x)+" "+str(a.y)+" "+str(b.y)+" "+str(a.radius)+" "+str(b.radius))
         return (a.x - b.x)**2 + (a.y - b.y)**2 <= (a.radius + b.radius)**2
 
 def main():
