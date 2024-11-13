@@ -1,6 +1,6 @@
 # Asteroids-Game
 
-## a simpl game made using pygame to practice python programming
+## a simple game made using pygame to practice python programming
 
 the premise of the game is simple:
 * you are a ship in space 
